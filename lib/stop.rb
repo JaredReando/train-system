@@ -6,6 +6,7 @@ class Stop
     @train_id = attributes[:train_id]
     @city_id = attributes[:city_id]
     @id = attributes[:id]
+    @time = attributes[:time]
   end
 
   def self.all_basic(stops)
@@ -14,7 +15,8 @@ class Stop
       train_id = stop["trains_id"].to_i
       city_id = stop["cities_id"].to_i
       id = stop["id"].to_i
-      output_stops.push(Stop.new({:train_id => train_id, :city_id => city_id, :id => id}))
+      time = stop["time"]
+      output_stops.push(Stop.new({:train_id => train_id, :city_id => city_id, :id => id, :time => time}))
     end
     output_stops
   end
@@ -25,7 +27,7 @@ class Stop
   end
 
   def save
-    result = DB.exec("INSERT INTO stops (trains_id, cities_id) VALUES (#{@train_id}, #{@city_id}) RETURNING id;")
+    result = DB.exec("INSERT INTO stops (trains_id, cities_id, time) VALUES (#{@train_id}, #{@city_id}, '#{@time}') RETURNING id;")
     @id = result.first["id"].to_i
   end
 
