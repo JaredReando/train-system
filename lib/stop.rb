@@ -1,0 +1,59 @@
+class Stop
+
+  attr_reader(:train_id, :city_id, :id)
+
+  def initialize(attributes)
+    @train_id = attributes[:train_id]
+    @city_id = attributes[:city_id]
+    @id = attributes[:id]
+  end
+
+  def self.all_basic(stops)
+    output_stops = []
+    stops.each() do |stop|
+      train_id = stop["trains_id"].to_i
+      city_id = stop["cities_id"].to_i
+      id = stop["id"].to_i
+      output_stops.push(Stop.new({:train_id => train_id, :city_id => city_id, :id => id}))
+    end
+    output_stops
+  end
+
+  def self.all
+    returned_stops = DB.exec("SELECT * FROM stops;")
+    Stop.all_basic(returned_stops)
+  end
+
+  def save
+    result = DB.exec("INSERT INTO stops (trains_id, cities_id) VALUES (#{@train_id}, #{@city_id}) RETURNING id;")
+    @id = result.first["id"].to_i
+  end
+
+  def update(params)
+    @train_id = params[:train_id].to_i
+    @city_id = params[:city_id].to_i
+
+    DB.exec("UPDATE stops SET trains_id = #{@train_id}, cities_id = #{@city_id} WHERE id = #{@id}")
+  end
+
+  def delete
+    DB.exec("DELETE FROM stops WHERE id = #{@id}")
+  end
+
+  def self.all_by_city_id(city_id)
+    returned_stops = DB.exec("SELECT * FROM stops WHERE cities_id = #{city_id}")
+    Stop.all_basic(returned_stops)
+  end
+
+  def self.all_by_train_id(train_id)
+    returned_stops = DB.exec("SELECT * FROM stops WHERE trains_id = #{train_id}")
+    Stop.all_basic(returned_stops)
+  end
+
+  def ==(other_instance)
+    @train_id == other_instance.train_id && @city_id == other_instance.city_id
+  end
+
+
+
+end

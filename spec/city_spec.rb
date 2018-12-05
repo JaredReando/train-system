@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe(City) do
   describe("#all") do
-    it("starts off with no lists") do
+    it("starts off with no cities") do
       expect(City.all()).to(eq([]))
     end
   end
@@ -46,7 +46,7 @@ describe(City) do
     city.save()
     city.delete
     expect(City.all).to(eq([]))
-  end
+    end
   end
 
   describe(".all_by_state") do

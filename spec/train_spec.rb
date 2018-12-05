@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe(Train) do
   describe("#all") do
-    it("starts off with no lists") do
+    it("starts off with no trains") do
       expect(Train.all()).to(eq([]))
     end
   end
