@@ -38,6 +38,7 @@ class City
 
   def delete
     DB.exec("DELETE FROM cities WHERE id = #{@id}")
+    DB.exec("DELETE FROM stops WHERE cities_id = #{@id}")
   end
 
   def self.all_by_state(state)

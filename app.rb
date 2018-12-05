@@ -70,6 +70,27 @@ post("/add_stop/:id") do
   redirect ("/trains/#{train_id}")
 end
 
+delete("/cities/:id") do
+  city_id = params[:id].to_i
+  city = City.find_by_id(city_id)
+  city.delete
+  redirect("/operator")
+end
+
+delete("/trains/:id") do
+  train_id = params[:id].to_i
+  train = Train.find_by_id(train_id)
+  train.delete
+  redirect("/operator")
+end
+
+delete("/stops/:id") do
+  stop_id = params[:id].to_i
+  train_id = params[:train_id].to_i
+  stop = Stop.find_by_id(stop_id)
+  stop.delete
+  redirect("/trains/#{train_id}")
+end
 
 # post("/") do
 #   if (params[:list_entry] == "")

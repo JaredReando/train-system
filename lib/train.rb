@@ -38,6 +38,7 @@ class Train
 
   def delete
     DB.exec("DELETE FROM trains WHERE id = #{@id}")
+    DB.exec("DELETE FROM stops WHERE trains_id = #{@id}")
   end
 
   def self.all_by_direction(direction)

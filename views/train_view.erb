@@ -11,35 +11,43 @@
   <button type="submit">Add a stop</button>
 </form>
 
-<div class="col-md-6">
-  <div class="col-md-10">
-    <% if @train_stops.any?() %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">City</th>
-          <th scope="col">State</th>
-          <th scope="col">Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        Here's a list of all of your STOPS!!!:
 
-        <% @train_stops.each_with_index do |stop, index|%>
-        <tr>
-          <th scope="row"><%= index+1 %></th>
-          <td><%= stop["city_name"] %></td>
-          <td><%= stop["state"] %></td>
-          <td><%= stop["time"] %></td>
-          </tr>
-          <%end%>
-        </tbody>
-      </table>
-      <% else %>
-      <br><br><br><br>
-      <p>You don't have any cities yet!</p>
-      <% end %>
-    </div>
-</div>
+<% if @train_stops.any?() %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">City</th>
+      <th scope="col">State</th>
+      <th scope="col">Time</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    Here's a list of all of your STOPS!!!:
+
+    <% @train_stops.each_with_index do |stop, index|%>
+    <tr>
+      <th scope="row"><%= index+1 %></th>
+      <td><%= stop["city_name"] %></td>
+      <td><%= stop["state"] %></td>
+      <td><%= stop["time"] %></td>
+      <td><form action="/stops/<%= stop['stop_id'].to_i %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="train_id" value="<%= @train.id %>">  
+        <button type="submit">X</button>
+      </form>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+  <% else %>
+  <br><br><br><br>
+  <p>You don't have any cities yet!</p>
+  <% end %>
+
+<form action="/trains/<%= @train.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">DELETE</button>
+</form>
 <a class ="back-btn" href="/operator">Back</a>
