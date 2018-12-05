@@ -1,7 +1,74 @@
-<form class="add-train" action="/add_train" method="post">
-  <label for="add-train">Name of train</label>
-  <input type="text" required="true" name="train_name"><br>
-  <label for="add-train">Add the train's direction</label>
-  <input type="text" required="true" name="train_direction"><br>
-  <button type="submit">Add a train</button>
-</form>
+<div class="row">
+  <div class="col-md-6">
+    <form class="add-train" action="/add_train" method="post">
+      <label for="add-train">Name of train</label>
+      <input type="text" required="true" name="train_name"><br>
+      <label for="add-train">Add the train's direction</label>
+      <input type="text" required="true" name="train_direction"><br>
+      <button type="submit">Add a train</button>
+    </form>
+    <div class="col-md-10">
+      <% if @trains.any?() %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          Here's a list of all of your TRAINS:
+
+          <% @trains.each_with_index do |train, index|%>
+          <tr>
+            <th scope="row"><%= index+1 %></th>
+            <td><a href="/trains/<%= train.id %>"><%= train.name %></a></td>
+            <td><%= train.direction %>
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+        <% else %>
+        <br><br><br><br>
+        <p>You don't have any trains yet!</p>
+        <% end %>
+      </div>
+  </div>
+  <div class="col-md-6">
+    <form class="add-city" action="/add_city" method="post">
+      <label for="add-city">City: </label>
+      <input type="text" required="true" name="city_name"><br>
+      <label for="add-city">State: </label>
+      <input type="text" required="true" name="state"><br>
+      <button type="submit">Add a city</button>
+    </form>
+    <div class="col-md-10">
+      <% if @cities.any?() %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+          </tr>
+        </thead>
+        <tbody>
+          Here's a list of all of your CITIES!!!:
+
+          <% @cities.each_with_index do |city, index|%>
+          <tr>
+            <th scope="row"><%= index+1 %></th>
+            <td><a href="/cities/<%= city.id %>"><%= city.name %></a></td>
+            <td><%= city.state %>
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+        <% else %>
+        <br><br><br><br>
+        <p>You don't have any cities yet!</p>
+        <% end %>
+      </div>
+  </div>
+</div>

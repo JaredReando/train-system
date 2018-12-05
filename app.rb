@@ -21,7 +21,7 @@ end
 
 get("/operator") do
   @cities = City.all
-  @stops = Stop.all
+  # @stops = Stop.all
   @trains = Train.all
 (erb :operator)
 end
@@ -30,11 +30,42 @@ end
 post("/add_train") do
   train_name = params.fetch("train_name")
   train_direction = params.fetch("train_direction")
-  train = Train.new({:name => train_name, :direction => train_direction, :id => nil})
+  train = Train.new({:name => train_name, :direction => train_direction})
   train.save()
-  
+  redirect ("/operator")
+end
 
-redirect ("/operator")
+post("/add_city") do
+  city_name = params.fetch("city_name")
+  state = params.fetch("state")
+  city = City.new({:name => city_name, :state => state})
+  city.save()
+  redirect ("/operator")
+end
+
+get("/cities/:id") do
+  city_id = params[:id].to_i
+  # @stops = Stop.all
+  @trains = Stop.get_trains_by_city(city_id)
+  @city = City.find_by_id(city_id)
+  (erb :city_view)
+end
+
+get("/trains/:id")do
+  train_id = params[:id].to_i
+  @train = Train.find_by_id(train_id)
+  @cities = City.all
+  @current_cities = Stop.get_cities_by_train(train_id)
+  (erb :train_view)
+end
+
+post("/add_stop/:id") do
+  train_id = params[:id].to_i
+  city_id = params[:city].to_i
+  time = params[:time]
+  stop = Stop.new({:train_id => train_id, :city_id => city_id, :time => time})
+  stop.save
+  redirect ("/trains/#{train_id}")
 end
 # post("/") do
 #   if (params[:list_entry] == "")

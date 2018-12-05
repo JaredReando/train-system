@@ -62,7 +62,7 @@ class Stop
   end
 
   def self.get_cities_by_train(train_id)
-    stops = DB.exec("SELECT * FROM stops WHERE trains_id = #{train_id} SORT BY time")
+    stops = DB.exec("SELECT * FROM stops WHERE trains_id = #{train_id} ORDER BY time")
     cities = []
     stops.each do |stop|
       cities.push(City.find_by_id(stop.fetch("cities_id").to_i))
@@ -71,7 +71,7 @@ class Stop
   end
 
   def self.get_trains_by_city(city_id)
-    stops = DB.exec("SELECT * FROM stops WHERE cities_id = #{city_id} SORT BY time")
+    stops = DB.exec("SELECT * FROM stops WHERE cities_id = #{city_id} ORDER BY time")
     trains = []
     stops.each do |stop|
       trains.push(Train.find_by_id(stop.fetch("trains_id").to_i))
