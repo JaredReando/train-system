@@ -54,6 +54,27 @@ class Stop
     @train_id == other_instance.train_id && @city_id == other_instance.city_id
   end
 
+  def self.find_by_id(id)
+    returned_stop = DB.exec("SELECT * FROM stops WHERE id = #{id}")
+    Stop.all_basic(returned_stop)[0]
+  end
 
+  def self.get_cities_by_train(train_id)
+    stops = DB.exec("SELECT * FROM stops WHERE trains_id = #{train_id}")
+    cities = []
+    stops.each do |stop|
+      cities.push(City.find_by_id(stop.fetch("cities_id").to_i))
+    end
+    cities
+  end
+
+  def self.get_trains_by_city(city_id)
+    stops = DB.exec("SELECT * FROM stops WHERE cities_id = #{city_id}")
+    trains = []
+    stops.each do |stop|
+      trains.push(Train.find_by_id(stop.fetch("trains_id").to_i))
+    end
+    trains
+  end
 
 end

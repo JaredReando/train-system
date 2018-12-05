@@ -49,4 +49,9 @@ class City
     @name == other_instance.name && @state == other_instance.state
   end
 
+  def self.find_by_id(id)
+    returned_city = DB.exec("SELECT * FROM cities WHERE id = #{id}")
+    City.all_basic(returned_city)[0]
+  end
+
 end

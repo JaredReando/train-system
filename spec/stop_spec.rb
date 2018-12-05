@@ -77,4 +77,54 @@ describe(Stop) do
     end
   end
 
+  describe(".find_by_id") do
+    it("will find the stop with a given id") do
+      stop = Stop.new({:train_id => 1, :city_id => 2, :id => nil})
+      stop.save
+      expect(Stop.find_by_id(stop.id)).to(eq(stop))
+    end
+  end
+
+  describe(".get_cities_by_train") do
+    it("gets all cities that a train stops in") do
+      city1 = City.new({:name => "Portland", :state => "Oregon", :id => nil})
+      city1.save
+      city2 = City.new({:name => "San Francisco", :state => "California", :id => nil})
+      city2.save
+      train1 = Train.new({:name => "Red Line", :direction => "West", :id => nil})
+      train1.save()
+      train2 = Train.new({:name => "Green Line", :direction => "East", :id => nil})
+      train2.save()
+      stop1 = Stop.new({:train_id => train1.id, :city_id => city1.id, :id => nil})
+      stop2 = Stop.new({:train_id => train1.id, :city_id => city2.id, :id => nil})
+      stop3 = Stop.new({:train_id => train2.id, :city_id => city1.id, :id => nil})
+      stop1.save
+      stop2.save
+      stop3.save
+      expect(Stop.get_cities_by_train(train1.id)).to(eq([city1, city2]))
+      expect(Stop.get_cities_by_train(train2.id)).to(eq([city1]))
+    end
+  end
+
+  describe(".get_trains_by_city") do
+    it("gets all cities that a train stops in") do
+      city1 = City.new({:name => "Portland", :state => "Oregon", :id => nil})
+      city1.save
+      city2 = City.new({:name => "San Francisco", :state => "California", :id => nil})
+      city2.save
+      train1 = Train.new({:name => "Red Line", :direction => "West", :id => nil})
+      train1.save()
+      train2 = Train.new({:name => "Green Line", :direction => "East", :id => nil})
+      train2.save()
+      stop1 = Stop.new({:train_id => train1.id, :city_id => city1.id, :id => nil})
+      stop2 = Stop.new({:train_id => train1.id, :city_id => city2.id, :id => nil})
+      stop3 = Stop.new({:train_id => train2.id, :city_id => city1.id, :id => nil})
+      stop1.save
+      stop2.save
+      stop3.save
+      expect(Stop.get_trains_by_city(city1.id)).to(eq([train1, train2]))
+      expect(Stop.get_trains_by_city(city2.id)).to(eq([train1]))
+    end
+  end
+
 end

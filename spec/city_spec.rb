@@ -67,4 +67,12 @@ describe(City) do
     end
   end
 
+  describe(".find_by_id") do
+    it("will find the city with a given id") do
+      city = City.new({:name => "Portland", :state => "Oregon", :id => nil})
+      city.save
+      expect(City.find_by_id(city.id)).to(eq(city))
+    end
+  end
+
 end

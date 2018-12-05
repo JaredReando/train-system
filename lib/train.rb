@@ -49,4 +49,9 @@ class Train
     @name == other_instance.name && @direction == other_instance.direction
   end
 
+  def self.find_by_id(id)
+    returned_train = DB.exec("SELECT * FROM trains WHERE id = #{id}")
+    Train.all_basic(returned_train)[0]
+  end
+
 end
