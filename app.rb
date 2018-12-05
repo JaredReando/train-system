@@ -48,6 +48,8 @@ get("/cities/:id") do
   # @stops = Stop.all
   @trains = Stop.get_trains_by_city(city_id)
   @city = City.find_by_id(city_id)
+  @local_trains = Stop.get_important_city_info(city_id)
+  # binding.pry
   (erb :city_view)
 end
 

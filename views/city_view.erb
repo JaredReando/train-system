@@ -1,1 +1,33 @@
 <h1>City View</h1>
+<div class="col-md-6">
+  <div class="col-md-10">
+    <% if @local_trains.any?() %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Train</th>
+          <th scope="col">Direction</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        Here's a list of all of your STOPS!!!:
+
+        <% @local_trains.each_with_index do |stop, index|%>
+        <tr>
+          <th scope="row"><%= index+1 %></th>
+          <td><%= stop["train_name"] %></td>
+          <td><%= stop["direction"] %></td>
+          <td><%= stop["time"] %></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+      <% else %>
+      <br><br><br><br>
+      <p>Currently, no trains go to this city!</p>
+      <% end %>
+    </div>
+</div>
+<a class ="back-btn" href="/operator">Back</a>
