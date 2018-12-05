@@ -55,7 +55,7 @@ get("/trains/:id")do
   train_id = params[:id].to_i
   @train = Train.find_by_id(train_id)
   @cities = City.all
-  @current_cities = Stop.get_cities_by_train(train_id)
+  @train_stops = Stop.get_important_train_info(train_id)
   (erb :train_view)
 end
 
@@ -67,6 +67,8 @@ post("/add_stop/:id") do
   stop.save
   redirect ("/trains/#{train_id}")
 end
+
+
 # post("/") do
 #   if (params[:list_entry] == "")
 #     redirect "/"

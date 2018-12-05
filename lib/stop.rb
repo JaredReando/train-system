@@ -79,4 +79,13 @@ class Stop
     trains
   end
 
+  def self.get_important_train_info(train_id)
+    important_stops = DB.exec("SELECT time, cities.name AS city_name, state, trains.name AS train_name, direction FROM trains INNER JOIN stops ON stops.trains_id=#{train_id} INNER JOIN cities ON stops.cities_id=cities.id ORDER BY time;")
+  end
+
+  def self.get_important_city_info(city_id)
+    important_stops = DB.exec("SELECT time, cities.name AS city_name, state, trains.name AS train_name, direction FROM cities INNER JOIN stops ON stops.cities_id=#{city_id} INNER JOIN trains ON stops.trains_id=trains.id ORDER BY time;")
+  end
 end
+# SELECT time, cities.name AS city_name, state, trains.name AS train_name, direction FROM trains INNER JOIN stops ON stops.trains_id=trains.id INNER JOIN cities ON stops.cities_id=cities.id
+# ;
