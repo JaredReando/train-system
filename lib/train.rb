@@ -30,6 +30,12 @@ class Train
     @id = result.first["id"].to_i
   end
 
+  def update(params)
+    @name = params[:name]
+    @direction = params[:direction]
+    DB.exec("UPDATE trains SET name = '#{@name}', direction = '#{@direction}' WHERE id = #{@id}")
+  end
+
   def self.all_by_direction(direction)
     returned_trains = DB.exec("SELECT * FROM trains WHERE direction = '#{direction}'")
     Train.all_basic(returned_trains)

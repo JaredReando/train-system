@@ -1,20 +1,20 @@
 require 'spec_helper'
 
 describe(Train) do
-  describe(".all") do
+  describe("#all") do
     it("starts off with no lists") do
       expect(Train.all()).to(eq([]))
     end
   end
 
-  describe(".name") do
+  describe("#name") do
     it("returns its name") do
       train = Train.new({:name => "Red Line", :direction => "West", :id => nil})
       expect(train.name()).to(eq("Red Line"))
     end
   end
 
-  describe(".id") do
+  describe("#id") do
     it("sets its id when saved") do
       train = Train.new({:name => "Red Line", :direction => "West", :id => nil})
       train.save()
@@ -22,7 +22,7 @@ describe(Train) do
     end
   end
 
-  describe(".save") do
+  describe("#save") do
     it("saves train to the database") do
       train = Train.new({:name => "Red Line", :direction => "West", :id => nil})
       train.save()
@@ -30,7 +30,17 @@ describe(Train) do
     end
   end
 
-  describe("#all_by_direction") do
+  describe("#update") do
+    it("updates train to the database") do
+      train = Train.new({:name => "Red Line", :direction => "West", :id => nil})
+      train.save()
+      train.update({:name => "Blue Line", :direction => "East"})
+      expect(train.name()).to(eq("Blue Line"))
+      expect(train.direction()).to(eq("East"))
+    end
+  end
+
+  describe(".all_by_direction") do
     it("sorts based off of direction") do
       train1 = Train.new({:name => "Red Line", :direction => "West", :id => nil})
       train1.save()

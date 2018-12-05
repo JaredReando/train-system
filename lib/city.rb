@@ -30,6 +30,12 @@ class City
     @id = result.first["id"].to_i
   end
 
+  def update(params)
+    @name = params[:name]
+    @state = params[:state]
+    DB.exec("UPDATE cities SET name = '#{@name}', state = '#{@state}' WHERE id = #{@id}")
+  end
+
   def self.all_by_state(state)
     returned_cities = DB.exec("SELECT * FROM cities WHERE state = '#{state}'")
     City.all_basic(returned_cities)
