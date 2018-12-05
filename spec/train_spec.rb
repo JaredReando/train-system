@@ -40,6 +40,15 @@ describe(Train) do
     end
   end
 
+  describe('#delete')do
+    it("deletes a train from the database")do
+    train = Train.new({:name => "Red Line", :direction => "West", :id => nil})
+    train.save()
+    train.delete
+    expect(Train.all).to(eq([]))
+    end
+  end
+
   describe(".all_by_direction") do
     it("sorts based off of direction") do
       train1 = Train.new({:name => "Red Line", :direction => "West", :id => nil})

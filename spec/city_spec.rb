@@ -40,6 +40,15 @@ describe(City) do
     end
   end
 
+  describe('#delete')do
+    it("deletes a city from the database")do
+    city = City.new({:name => "Portland", :state => "Oregon", :id => nil})
+    city.save()
+    city.delete
+    expect(City.all).to(eq([]))
+  end
+  end
+
   describe(".all_by_state") do
     it("sorts based off of state") do
       city1 = City.new({:name => "Portland", :state => "Oregon", :id => nil})

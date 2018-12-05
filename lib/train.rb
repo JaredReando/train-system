@@ -36,6 +36,10 @@ class Train
     DB.exec("UPDATE trains SET name = '#{@name}', direction = '#{@direction}' WHERE id = #{@id}")
   end
 
+  def delete
+    DB.exec("DELETE FROM trains WHERE id = #{@id}")
+  end
+
   def self.all_by_direction(direction)
     returned_trains = DB.exec("SELECT * FROM trains WHERE direction = '#{direction}'")
     Train.all_basic(returned_trains)

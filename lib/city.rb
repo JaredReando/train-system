@@ -36,6 +36,10 @@ class City
     DB.exec("UPDATE cities SET name = '#{@name}', state = '#{@state}' WHERE id = #{@id}")
   end
 
+  def delete
+    DB.exec("DELETE FROM cities WHERE id = #{@id}")
+  end
+
   def self.all_by_state(state)
     returned_cities = DB.exec("SELECT * FROM cities WHERE state = '#{state}'")
     City.all_basic(returned_cities)
