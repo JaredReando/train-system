@@ -1,0 +1,37 @@
+<h1>This is the index page</h1>
+
+<p>Enter a new list name below.</p>
+<p>Add tasks to your lists by clicking the link to navigate to the list detail page.</p>
+
+<form action="/" method="post">
+  List: <input type="text" name="list_entry" value="">
+  <button type="submit" >Enter</button>
+</form>
+
+<% if @lists.any?() %>
+  Here's a list of all of your lists so far:
+  <ul>
+    <% @lists.each do |list|%>
+    <li id="<%= list.id %>"><a href="/tasks/<%= list.id %>"><%= list.name %></a></li>
+    <%end%>
+  </ul>
+<% else %>
+<br><br><br><br>
+  <p>You don't have any lists yet!</p>
+<% end %>
+
+
+<form action="/add_task" method="post">
+  <label for="list_id">Select a List</label>
+  <select name='list_entry' type='text'>
+    <% @lists.each() do |list| %>
+      <option value="<%= list.id %>"> <%= list.name %> </option>
+    <% end %>
+  </select>
+
+
+  <label for="description">Description of the task:</label>
+  <input id="description" name="description" type="text">
+
+  <button type="submit">Add task</button>
+</form>
