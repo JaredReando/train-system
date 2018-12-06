@@ -35,4 +35,15 @@ class Rider
     returned_rider = DB.exec("SELECT * FROM riders WHERE id = #{id}")
     Rider.all_basic(returned_rider)[0]
   end
+
+  def self.get_customer(name)
+    returned_rider = DB.exec("SELECT * FROM riders WHERE name = '#{name}'")
+    if(!(returned_rider.any?))
+      rider = Rider.new({:name => name})
+      rider.save
+      return rider
+    else
+      return (Rider.all_basic(returned_rider))[0]
+    end
+  end
 end

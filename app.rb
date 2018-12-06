@@ -35,8 +35,20 @@ end
 post("/purchase/:id") do
   @start_city = params.fetch("start_city_id").to_i
   @end_city = params.fetch("end_city_id").to_i
+  @train = params[:id].to_i
+  erb :customer_login
+end
 
-
+post("/see_ticket") do
+  start_city = params.fetch("start_city_id").to_i
+  end_city = params.fetch("end_city_id").to_i
+  train = params.fetch("train_id").to_i
+  customer_name = params.fetch("customer_name")
+  rider = Rider.get_customer(customer_name)
+  ticket = Ticket.new({:rider_id => rider.id, :train_id => train, :start_city_id => start_city, :end_city_id => end_city})
+  ticket.save
+  @info = ticket.get_important_details
+  (erb :ticket_page)
 end
 
 get("/train_info/:id") do

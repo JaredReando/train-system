@@ -18,7 +18,7 @@ class Ticket
       start_city_id = ticket["start_city_id"].to_i
       end_city_id = ticket["end_city_id"].to_i
       id = ticket["id"].to_i
-      output_tickets.push(Ticket.new({:rider_id => rider_id, :train_id => train_id, :start_city_id => start_city_id,:end_city_id => end_city_id, :id => id}))
+      output_tickets.push(Ticket.new({:rider_id => rider_id, :train_id => train_id, :start_city_id => start_city_id, :end_city_id => end_city_id, :id => id}))
     end
     output_tickets
   end
@@ -46,7 +46,7 @@ class Ticket
     start_details = "#{start_city.name}, #{start_city.state}"
     end_details = "#{end_city.name}, #{end_city.state}"
     rider_details = rider.name
-    {:train_details => train_details, :start_city_details => start_details, :end_city_details => end_details, :rider_details => rider_details}
+    return {:train_details => train_details, :start_city_details => start_details, :end_city_details => end_details, :rider_details => rider_details}
   end
 
   def self.find_by_id(id)

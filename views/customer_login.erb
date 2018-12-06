@@ -1,0 +1,8 @@
+<form action="/see_ticket" method="post">
+  <input type="hidden" name="start_city_id" value="<%= @start_city %>">
+  <input type="hidden" name="end_city_id" value="<%= @end_city %>">
+  <input type="hidden" name="train_id" value="<%= @train %>">
+  <label for="customer_name">Please enter your name:</label>
+  <input type="text" name="customer_name" placeholder="Your Name Here">
+  <button type="submit" name="button">See your ticket</button>
+</form>
