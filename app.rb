@@ -14,18 +14,33 @@ get("/") do
 (erb :index)
 end
 
-get("/rider") do
-
-(erb :index)
-end
-
 get("/operator") do
   @cities = City.all
-  # @stops = Stop.all
   @trains = Train.all
 (erb :operator)
 end
 
+get("/rider") do
+  @cities = City.all
+  @trains = Train.all
+(erb :rider)
+end
+
+get("/train_info/:id") do
+  train_id = params[:id].to_i
+  @train = Train.find_by_id(train_id)
+  @cities = City.all
+  @train_stops = Stop.get_important_train_info(train_id)
+  (erb :train_info)
+end
+
+get("/city_info/:id") do
+  city_id = params[:id].to_i
+  @trains = Stop.get_trains_by_city(city_id)
+  @city = City.find_by_id(city_id)
+  @local_trains = Stop.get_important_city_info(city_id)
+  (erb :city_info)
+end
 
 post("/add_train") do
   train_name = params.fetch("train_name")
@@ -45,11 +60,9 @@ end
 
 get("/cities/:id") do
   city_id = params[:id].to_i
-  # @stops = Stop.all
   @trains = Stop.get_trains_by_city(city_id)
   @city = City.find_by_id(city_id)
   @local_trains = Stop.get_important_city_info(city_id)
-  # binding.pry
   (erb :city_view)
 end
 

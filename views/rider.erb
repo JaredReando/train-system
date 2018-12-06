@@ -1,4 +1,61 @@
-<h1>Train System</h1>
+<div class="row">
+  <div class="col-md-6">
+    <div class="col-md-10">
+      <% if @trains.any?() %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          Here's a list of all of your TRAINS:
 
-<a href="/rider">Rider View</a>
-<a href="/operator">Operator View</a>
+          <% @trains.each_with_index do |train, index|%>
+          <tr>
+            <th scope="row"><%= index+1 %></th>
+            <td><a href="/train_info/<%= train.id %>"><%= train.name %></a></td>
+            <td><%= train.direction %>
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+        <% else %>
+        <br><br><br><br>
+        <p>You don't have any trains yet!</p>
+        <% end %>
+      </div>
+  </div>
+  <div class="col-md-6">
+    <div class="col-md-10">
+      <% if @cities.any?() %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+          </tr>
+        </thead>
+        <tbody>
+          Here's a list of all of your CITIES!!!:
+
+          <% @cities.each_with_index do |city, index|%>
+          <tr>
+            <th scope="row"><%= index+1 %></th>
+            <td><a href="/city_info/<%= city.id %>"><%= city.name %></a></td>
+            <td><%= city.state %>
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+        <% else %>
+        <br><br><br><br>
+        <p>You don't have any cities yet!</p>
+        <% end %>
+      </div>
+  </div>
+</div>
+<a class ="back-btn" href="/">Back</a>
