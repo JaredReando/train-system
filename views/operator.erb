@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-6">
     <form class="add-train" action="/add_train" method="post">
-      <label for="add-train">Name of train</label>
-      <input type="text" required="true" name="train_name"><br>
-      <label for="add-train">Add the train's direction</label>
+      <label for="add-train">Name of train:</label>
+      <input class= "input" type="text" required="true" name="train_name"><br>
+      <label for="add-train">Add the train's direction:</label>
       <input type="text" required="true" name="train_direction"><br>
-      <button type="submit">Add a train</button>
+      <button type="submit" class="btn btn-info">Add a train</button>
     </form>
     <div class="col-md-10">
       <% if @trains.any?() %>
@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          Here's a list of all of your TRAINS:
+          <h3>Trains</h3>
 
           <% @trains.each_with_index do |train, index|%>
           <tr>
@@ -41,7 +41,7 @@
       <input type="text" required="true" name="city_name"><br>
       <label for="add-city">State: </label>
       <input type="text" required="true" name="state"><br>
-      <button type="submit">Add a city</button>
+      <button type="submit" class="btn btn-info">Add a city</button>
     </form>
     <div class="col-md-10">
       <% if @cities.any?() %>
@@ -54,7 +54,7 @@
           </tr>
         </thead>
         <tbody>
-          Here's a list of all of your CITIES!!!:
+          <h3>Cities</h3>
 
           <% @cities.each_with_index do |city, index|%>
           <tr>

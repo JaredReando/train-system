@@ -15,9 +15,9 @@
     <% @possible_trains.each_with_index do |train, index|%>
     <tr>
       <th scope="row"><%= index+1 %></th>
-      <td><a href="/train_info/<%= train.id %>"><%= train.name %></a></td>
+      <td><%= train.name %></td>
       <td><%= train.direction %></td>
-      <td><form action="/purchase/<%= train.id %>" method="post"><input type="hidden" name="start_city_id" value="<%= @start_city %>"><input type="hidden" name="end_city_id" value="<%= @end_city %>"><button type="submit">Purchase Ticket</button></form></td>
+      <td><form action="/purchase/<%= train.id %>" method="post"><input type="hidden" name="start_city_id" value="<%= @start_city %>"><input type="hidden" name="end_city_id" value="<%= @end_city %>"><button type="submit" class="btn btn-info">Purchase Ticket</button></form></td>
       </tr>
       <%end%>
     </tbody>
@@ -26,3 +26,5 @@
   <br><br><br><br>
   <p>There are no trains going to those cities!</p>
   <% end %>
+
+<a class ="back-btn" href="/rider">Back</a>

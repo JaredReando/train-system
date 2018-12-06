@@ -1,6 +1,12 @@
-<h1>Your Ticket:</h1>
+<a class ="back-btn" href="/rider">Back</a>
 
-<h2>Your name: <%= @info[:rider_details] %></h2>
-<h2>Train: <%= @info[:train_details] %></h2>
-<h2>To: <%= @info[:start_city_details] %></h2>
-<h2>From: <%= @info[:end_city_details] %></h2>
+<div class="card">
+  <div class="card-header">
+    <h1><%= @info[:rider_details] %>'s Ticket</h1>
+  </div>
+  <div class="card-body">
+    <h2>Train: <%= @info[:train_details] %></h2>
+    <h2>To: <%= @info[:start_city_details] %></h2>
+    <h2>From: <%= @info[:end_city_details] %></h2>
+  </div>
+</div>

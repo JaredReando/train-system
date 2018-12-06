@@ -1,14 +1,14 @@
 <h1>Train View - <%= @train.name %> (<%= @train.direction %>)</h1>
 <form class="add-stop" action="/add_stop/<%= @train.id %>" method="post">
   <label for="time">Expected Arrival Time</label>
-  <input type="text" required="true" name="time"><br>
+  <input class= "input" type="text" required="true" name="time"><br>
   <label for="city">Add a city</label>
   <select name="city">
     <% @cities.each do |city| %>
       <option value="<%= city.id %>"><%= city.name %>, <%= city.state %></option>
     <% end %>
   </select><br>
-  <button type="submit">Add a stop</button>
+  <button type="submit" class="btn btn-info">Add a stop</button>
 </form>
 
 
@@ -36,7 +36,7 @@
       <td><form action="/stops/<%= stop['stop_id'].to_i %>" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="train_id" value="<%= @train.id %>">
-        <button type="submit">X</button>
+        <button type="submit" class="btn btn-info">X</button>
       </form>
       </tr>
       <%end%>
@@ -54,11 +54,11 @@
   <label for="add-train">Add the train's direction</label>
   <input type="text" required="true" name="train_direction" value="<%= @train.direction %>"><br>
   <input type="hidden" name="_method" value="patch">
-  <button type="submit">Edit</button>
+  <button type="submit" class="btn btn-info">Edit</button>
 </form>
 
 <form action="/trains/<%= @train.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
-  <button type="submit">DELETE</button>
+  <button type="submit" class="btn btn-danger">DELETE</button>
 </form>
 <a class ="back-btn" href="/operator">Back</a>

@@ -34,11 +34,11 @@
   <label for="add-city">State</label>
   <input type="text" required="true" name="state" value="<%= @city.state %>"><br>
   <input type="hidden" name="_method" value="patch">
-  <button type="submit">Edit</button>
+  <button type="submit" class="btn btn-info">Edit</button>
 </form>
 
 <form action="/cities/<%= @city.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
-  <button type="submit">DELETE</button>
+  <button type="submit" class="btn btn-danger">DELETE</button>
 </form>
 <a class ="back-btn" href="/operator">Back</a>
