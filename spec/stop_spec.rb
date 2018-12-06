@@ -127,4 +127,32 @@ describe(Stop) do
     end
   end
 
+  describe(".find_route") do
+    it("finds all trains that run through two selected cities") do
+      city1 = City.new({:name => "Portland", :state => "Oregon"})
+      city1.save
+      city2 = City.new({:name => "San Francisco", :state => "California"})
+      city2.save
+      train1 = Train.new({:name => "Red Line", :direction => "West"})
+      train1.save()
+      train2 = Train.new({:name => "Green Line", :direction => "East"})
+      train2.save()
+      train3 = Train.new({:name => "Blue Line", :direction => "North"})
+      train3.save()
+      train4 = Train.new({:name => "Yellow Line", :direction => "South"})
+      train4.save()
+      stop1 = Stop.new({:train_id => train1.id, :city_id => city1.id, :time => "00:00"})
+      stop2 = Stop.new({:train_id => train1.id, :city_id => city2.id, :time => "00:00"})
+      stop3 = Stop.new({:train_id => train2.id, :city_id => city1.id, :time => "00:00"})
+      stop4 = Stop.new({:train_id => train4.id, :city_id => city1.id, :time => "00:00"})
+      stop5 = Stop.new({:train_id => train4.id, :city_id => city2.id, :time => "00:00"})
+      stop1.save
+      stop2.save
+      stop3.save
+      stop4.save
+      stop5.save
+      expect(Stop.find_route(city1.id, city2.id)).to(eq([train1, train4]))
+    end
+  end
+
 end

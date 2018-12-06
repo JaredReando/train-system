@@ -21,7 +21,17 @@ end
 get("/rider") do
   @cities = City.all
   @trains = Train.all
+  @possible_trains = []
 (erb :rider)
+end
+
+post("/find_train")do
+  start_city = params.fetch("start_city").to_i
+  end_city = params.fetch("end_city").to_i
+  @possible_trains = Stop.find_route(start_city, end_city)
+  @cities = City.all
+  @trains = Train.all
+  (erb :rider)
 end
 
 get("/train_info/:id") do
@@ -61,7 +71,7 @@ get("/cities/:id") do
   @trains = Stop.get_trains_by_city(city_id)
   @city = City.find_by_id(city_id)
   @local_trains = Stop.get_important_city_info(city_id)
-  (erb :city_view)
+  (erb :city_operator_view)
 end
 
 get("/trains/:id")do
@@ -69,7 +79,7 @@ get("/trains/:id")do
   @train = Train.find_by_id(train_id)
   @cities = City.all
   @train_stops = Stop.get_important_train_info(train_id)
-  (erb :train_view)
+  (erb :train_operator_view)
 end
 
 post("/add_stop/:id") do

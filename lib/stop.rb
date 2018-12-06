@@ -86,4 +86,23 @@ class Stop
   def self.get_important_city_info(city_id)
     important_stops = DB.exec("SELECT s.id AS stop_id, time, cities.name AS city_name, state, trains.name AS train_name, direction, cities.id AS city_id, trains.id AS train_id FROM cities INNER JOIN stops s ON s.cities_id=cities.id INNER JOIN trains ON s.trains_id=trains.id WHERE cities.id = #{city_id} ORDER BY time;")
   end
+
+  def self.find_route(start_city_id, end_city_id)
+    start_trains = Stop.get_trains_by_city(start_city_id)
+    end_trains = Stop.get_trains_by_city(end_city_id)
+    both_trains = []
+    index = 0
+    while index < start_trains.length
+      index2 = 0
+      while index2 < end_trains.length
+        if start_trains[index].==end_trains[index2]
+          both_trains.push(start_trains[index])
+          break
+        end
+        index2 += 1
+      end
+      index += 1
+    end
+    both_trains
+  end
 end
