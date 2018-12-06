@@ -1,35 +1,42 @@
-<h1>City View</h1>
-<div class="col-md-6">
-  <div class="col-md-10">
-    <% if @local_trains.any?() %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Train</th>
-          <th scope="col">Direction</th>
-          <th scope="col">Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        Here's a list of all of your STOPS!!!:
+<h1>City View - <%= @city.name %>, <%= @city.state %></h1>
+<% if @local_trains.any?() %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Train</th>
+      <th scope="col">Direction</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    Here's a list of all of your STOPS!!!:
 
-        <% @local_trains.each_with_index do |stop, index|%>
-        <tr>
-          <th scope="row"><%= index+1 %></th>
-          <td><%= stop["train_name"] %></td>
-          <td><%= stop["direction"] %></td>
-          <td><%= stop["time"] %></td>
-          </tr>
-          <%end%>
-        </tbody>
-      </table>
-      <% else %>
-      <br><br><br><br>
-      <p>Currently, no trains go to this city!</p>
-      <% end %>
-    </div>
-</div>
+    <% @local_trains.each_with_index do |stop, index|%>
+    <tr>
+      <th scope="row"><%= index+1 %></th>
+      <td><%= stop["train_name"] %></td>
+      <td><%= stop["direction"] %></td>
+      <td><%= stop["time"] %></td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+  <% else %>
+  <br><br><br><br>
+  <p>Currently, no trains go to this city!</p>
+  <% end %>
+
+<h3>Update</h3>
+<form action="/cities/<%= @city.id %>" method="post">
+  <label for="add-city">Name of city</label>
+  <input type="text" required="true" name="city_name" value="<%= @city.name %>"><br>
+  <label for="add-city">State</label>
+  <input type="text" required="true" name="state" value="<%= @city.state %>"><br>
+  <input type="hidden" name="_method" value="patch">
+  <button type="submit">Edit</button>
+</form>
+
 <form action="/cities/<%= @city.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <button type="submit">DELETE</button>
