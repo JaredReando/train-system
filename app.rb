@@ -26,12 +26,17 @@ get("/rider") do
 end
 
 post("/find_train")do
-  start_city = params.fetch("start_city").to_i
-  end_city = params.fetch("end_city").to_i
-  @possible_trains = Stop.find_route(start_city, end_city)
-  @cities = City.all
-  @trains = Train.all
-  (erb :rider)
+  @start_city = params.fetch("start_city").to_i
+  @end_city = params.fetch("end_city").to_i
+  @possible_trains = Stop.find_route(@start_city, @end_city)
+  (erb :purchase)
+end
+
+post("/purchase/:id") do
+  @start_city = params.fetch("start_city_id").to_i
+  @end_city = params.fetch("end_city_id").to_i
+
+
 end
 
 get("/train_info/:id") do

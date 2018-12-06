@@ -5,13 +5,13 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col"></th>
             <th scope="col">Name</th>
             <th scope="col">Direction</th>
           </tr>
         </thead>
         <tbody>
-          Here's a list of all of your TRAINS:
+          <h3>All Trains</h3>
 
           <% @trains.each_with_index do |train, index|%>
           <tr>
@@ -34,13 +34,13 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col"></th>
             <th scope="col">City</th>
             <th scope="col">State</th>
           </tr>
         </thead>
         <tbody>
-          Here's a list of all of your CITIES!!!:
+          <h3>All Cities</h3>
 
           <% @cities.each_with_index do |city, index|%>
           <tr>
@@ -60,53 +60,24 @@
 </div>
 <div class="row">
   <div class="col-md-12">
+    <h3>Purchase A Ticket</h3>
     <form class="add-stop" action="/find_train" method="post">
       <label for="time">Depart from</label>
       <select name="start_city">
         <% @cities.each do |city| %>
           <option value="<%= city.id %>"><%= city.name %>, <%= city.state %></option>
         <% end %>
-      </select><br>
+      </select>
       <label for="time">To</label>
       <select name="end_city">
         <% @cities.each do |city| %>
           <option value="<%= city.id %>"><%= city.name %>, <%= city.state %></option>
         <% end %>
-      </select><br>
+      </select>
       <button type="submit">Find a Train</button>
     </form>
   </div>
 
-  <% if @possible_trains.any?() %>
-  <form class="" action="index.html" method="post">
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Train</th>
-        <th scope="col">Direction</th>
-        <th scope="col">Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      Here's a list of all of your Trains!!!:
-
-      <% @possible_trains.each_with_index do |train, index|%>
-      <tr>
-        <th scope="row"><%= index+1 %></th>
-        <td><a href="/train_info/<%= train.id %>"><%= train.name %></a></td>
-        <td><%= train.direction %></td>
-        <td><input type="submit" name="submit" value="submit"></td>
-        </tr>
-        <%end%>
-      </tbody>
-    </table>
-  </form>
-    <% else %>
-    <br><br><br><br>
-    <p>There are no trains going to those cities!</p>
-    <% end %>
   </div>
 </div>
 <a class ="back-btn" href="/">Back</a>
