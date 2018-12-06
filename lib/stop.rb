@@ -87,5 +87,3 @@ class Stop
     important_stops = DB.exec("SELECT s.id AS stop_id, time, cities.name AS city_name, state, trains.name AS train_name, direction, cities.id AS city_id, trains.id AS train_id FROM cities INNER JOIN stops s ON s.cities_id=cities.id INNER JOIN trains ON s.trains_id=trains.id WHERE cities.id = #{city_id} ORDER BY time;")
   end
 end
-# SELECT time, cities.name AS city_name, state, trains.name AS train_name, direction FROM trains INNER JOIN stops ON stops.trains_id=trains.id INNER JOIN cities ON stops.cities_id=cities.id
-# ;

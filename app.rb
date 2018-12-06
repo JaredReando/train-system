@@ -8,10 +8,8 @@ require("pg")
 
 DB = PG.connect({:dbname => "train_system"})
 
-
 get("/") do
-
-(erb :index)
+  (erb :index)
 end
 
 get("/operator") do
