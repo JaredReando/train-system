@@ -1,3 +1,4 @@
+<h3><a href="/rider"><< Back</a></h3>
 <h1>City View - <%= @city.name %>, <%= @city.state %></h1>
 <% if @local_trains.any?() %>
 <table class="table">
@@ -25,6 +26,5 @@
   <% else %>
   <br><br><br><br>
   <p>Currently, no trains go to this city!</p>
+  <p>We're sorry your city is so lame!</p>
   <% end %>
-
-<a class ="back-btn" href="/rider">Back</a>

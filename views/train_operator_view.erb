@@ -1,3 +1,4 @@
+<h3><a href="/operator"><< Back</a></h3>
 <h1>Train View - <%= @train.name %> (<%= @train.direction %>)</h1>
 <form class="add-stop" action="/add_stop/<%= @train.id %>" method="post">
   <label for="time">Expected Arrival Time</label>
@@ -36,7 +37,7 @@
       <td><form action="/stops/<%= stop['stop_id'].to_i %>" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="train_id" value="<%= @train.id %>">
-        <button type="submit" class="btn btn-info">X</button>
+        <button type="submit" class="btn btn-info" value="<%= stop['stop_id'].to_i %>">X</button>
       </form>
       </tr>
       <%end%>
@@ -61,4 +62,3 @@
   <input type="hidden" name="_method" value="delete">
   <button type="submit" class="btn btn-danger">DELETE</button>
 </form>
-<a class ="back-btn" href="/operator">Back</a>

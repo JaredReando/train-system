@@ -6,7 +6,7 @@ require("./lib/city")
 require("./lib/stop")
 require("pg")
 
-DB = PG.connect({:dbname => "train_system"})
+DB = PG.connect({:dbname => "train_system_test"})
 
 get("/") do
   (erb :index)
